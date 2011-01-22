@@ -1,0 +1,9 @@
+Usage: see index.php
+
+Known incompatibilities:
+ - Doesn't allow whitespace in front of headings, table rows, or lists (required by Creole)
+ - Allows the tilde character to occur in URLs, both within explicit links and within
+	automatically parsed URLs (because this would break urls for apache's userdir module,
+	which are of the format http://host/~username/ )
+
+ - Doesn't implement the addition of attributes to tables when allowing mediawiki-style tables
