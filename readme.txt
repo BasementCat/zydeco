@@ -7,3 +7,4 @@ Known incompatibilities:
 	which are of the format http://host/~username/ )
 
  - Doesn't implement the addition of attributes to tables when allowing mediawiki-style tables
+ - Also doesn't support the inline-tr syntax of mediawiki tables

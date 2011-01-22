@@ -134,7 +134,7 @@
 					case ']]':
 						if($this->escape||!$this->currentNode->descendentOf('a')){ $this->currentText.=$token; break; }
 						if(!isset($this->currentNode->Attributes['href']))
-							$this->currentNode->setAttribute('href', $this->currentText);
+							$this->currentNode->setAttribute('href', $this->HrefBase.$this->currentText);
 						$this->endNode('a', true);
 						break;
 					case '{{':
@@ -144,7 +144,7 @@
 					case '}}':
 						if($this->escape){ $this->currentText.=$token; break; }
 						if(!isset($this->currentNode->Attributes['src']))
-							$this->currentNode->setAttribute('src', $this->currentText);
+							$this->currentNode->setAttribute('src', $this->ImageBase.$this->currentText);
 						else
 							$this->currentNode->setAttribute('alt', $this->currentText);
 						$this->currentText='';
