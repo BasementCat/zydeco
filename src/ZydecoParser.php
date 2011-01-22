@@ -209,7 +209,8 @@
 					case '|':
 						if($this->escape){ $this->currentText.=$token; break; }
 						if($this->currentNode->Tag=='a'||$this->currentNode->Tag=='img'){
-							$this->currentNode->setAttribute('src', $this->currentText);
+							$is_a=($this->currentNode->Tag=='a');
+							$this->currentNode->setAttribute($is_a?'href':'src', ($is_a?$this->HrefBase:$this->ImageBase).$this->currentText);
 							$this->currentText='';
 							break;
 						}
