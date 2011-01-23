@@ -38,10 +38,50 @@
 
 		public function descendentOf($tag){
 			//this INCLUDES the current tag!
+			/*$tempNode=$this;
+			while($tempNode->Tag&&!fnmatch($tag, $tempNode->Tag))
+				$tempNode=$tempNode->Parent;
+			return fnmatch($tag, $tempNode->Tag);*/
+			return $this->getNearest($tag)?true:false;
+		}
+
+		public function getNearest($tag){
 			$tempNode=$this;
 			while($tempNode->Tag&&!fnmatch($tag, $tempNode->Tag))
 				$tempNode=$tempNode->Parent;
-			return fnmatch($tag, $tempNode->Tag);
+			if(fnmatch($tag, $tempNode->Tag)) return $tempNode;
+			return false;
+		}
+
+		public function getNext($tag){
+			if(fnmatch($tag, $this->Tag)) return $this;
+			if(is_array($this->Children)){
+				foreach($this->Children as $child)
+					if(fnmatch($tag, $child->Tag)) return $child;
+				foreach($this->Children as $child){
+					$test=$child->getNext($tag);
+					if($test) return $test;
+				}
+			}
+			return false;
+		}
+
+		public function getAll($tag){
+			$all=array();
+			if(fnmatch($tag, $this->Tag)) $all[]=$this;
+			if(is_array($this->Children)){
+				/*foreach($this->Children as $child)
+					if(fnmatch($tag, $child->Tag)) $all[]=$child;*/
+				foreach($this->Children as $child)
+					$all=array_merge($all, $child->getAll($tag));
+			}
+			return $all;
+		}
+
+		public function asText(){
+			$r=array();
+			foreach($this->getAll('_') as $txt) $r[]=$txt->Text;
+			return implode("", $r);
 		}
 
 		public function render($renderWhitespace=false, $level=0){
