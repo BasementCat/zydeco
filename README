@@ -1,3 +1,8 @@
+Zydeco is a creole-compliant (at least mostly!) wikitext parser, written in PHP.
+
+For info on the Creole markup language, see http://www.wikicreole.org/wiki/Home
+
+
 Usage: see index.php
 
 Known incompatibilities:
