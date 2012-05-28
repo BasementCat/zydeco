@@ -50,6 +50,7 @@
 					|{{{		#nowiki (only for finding the start)
 					|{{			#images
 					|}}			#end of images
+					|"""		#blockquote
 					|~			#escape char
 					|[\r\n]+	#Any end-of-line (any length string consisting of only \r and \n)
 					|[\t ]+		#Any whitespace (any length string consisting of only spaces and \t)
@@ -99,6 +100,16 @@
 					case '=': case '==': case '===': case '====': case '=====': case '======':
 						if($this->escape){ $this->currentText.=$token; break; }
 						$tag=sprintf('h%d', strlen($token));
+						if(!$this->endNode($tag, $this->currentNode->childOf($tag))){
+							if($this->beginningOfLine)
+								$this->startNode($tag);
+							else
+								$this->currentText.=$token;
+						}
+						break;
+					case '"""':
+						if($this->escape){ $this->currentText.=$token; break; }
+						$tag='blockquote';
 						if(!$this->endNode($tag, $this->currentNode->childOf($tag))){
 							if($this->beginningOfLine)
 								$this->startNode($tag);
