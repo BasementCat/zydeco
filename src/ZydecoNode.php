@@ -31,9 +31,9 @@
 
 		public function childOf($tag){
 			$tempNode=$this->Parent;
-			while($tempNode->Tag&&!fnmatch($tag, $tempNode->Tag))
+			while($tempNode&&$tempNode->Tag&&!fnmatch($tag, $tempNode->Tag))
 				$tempNode=$tempNode->Parent;
-			return fnmatch($tag, $tempNode->Tag);
+			return $tempNode?fnmatch($tag, $tempNode->Tag):false;
 		}
 
 		public function descendentOf($tag){
