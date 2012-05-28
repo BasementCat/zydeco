@@ -152,7 +152,7 @@
 						break;
 					case '{{{':
 						if($this->escape){ $this->currentText.=$token; break; }
-						if(preg_match("#[\r\n]$#", $this->currentText)&&preg_match("#^[ \t]*[\r\n]#", $text)){
+						if(preg_match("#[\r\n]$#", $this->currentText)&&preg_match("#^[ \t]*[\r\n]#", $this->currentText)){
 							//start of nowiki on a single line, no preceding whitespace
 							$this->addText();
 							if(preg_match("#^(.*?)(?<=[\r\n])}}}(.*)#s", $this->text, $matches)){
